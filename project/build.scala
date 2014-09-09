@@ -23,7 +23,7 @@ object build extends Build {
   type Sett = sbt.Def.Setting[_]
 
   lazy val standardSettings: Seq[Sett] =
-    Defaults.defaultSettings ++ Seq[Sett](
+    Defaults.coreDefaultSettings ++ Seq[Sett](
       organization := "au.com.cba.omnia"
     , sbtPlugin := true
     , scalaVersion := "2.10.4"
@@ -36,7 +36,7 @@ object build extends Build {
       , "-Xfatal-warnings"
       , "-feature"
       , "-language:_"
-      , "-target:jvm-1.6"
+      , "-target:jvm-1.7"
       )
         , updateOptions := updateOptions.value.withCachedResolution(true)
     ) ++ docSettings
