@@ -33,6 +33,7 @@ object ScalaSettings extends Plugin {
         "-target:jvm-1.6"
       ),
       javacOptions ++= Seq(
+        "-Xlint:unchecked",
         "-source", "1.6",
         "-target", "1.6"
       )
