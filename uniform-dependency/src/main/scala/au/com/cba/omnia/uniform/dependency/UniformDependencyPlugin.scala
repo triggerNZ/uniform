@@ -34,7 +34,7 @@ object UniformDependencyPlugin extends Plugin {
 
   object depend {
     object versions {
-      def hadoop     = "2.3.0-mr1-cdh5.1.2"
+      def hadoop       = "2.3.0-mr1-cdh5.1.2"
       def scalaz       = "7.1.0"
       def scalazStream = "0.5a"      // Needs to align with what is required by specs2
       def specs        = "2.4.13"
@@ -52,30 +52,29 @@ object UniformDependencyPlugin extends Plugin {
       def classutil    = "1.0.5"
       def scrooge      = "3.14.1"
       def bijection    = "0.6.3"
-      def hive       = "0.12.0-cdh5.1.2"
-      def parquet    = "1.2.5-cdh5.1.2"
+      def parquet      = "1.2.5-cdh5.1.2"
     }
 
     def omnia(project: String, version: String): Seq[ModuleID] =
       Seq("au.com.cba.omnia" %% project % version)
 
     def scaldingproject(
-      hadoop: String = versions.hadoop,
-      scalding: String = versions.scalding,
-      algebird: String = versions.algebird,
-      log4j: String = versions.log4j,
-      slf4j: String = versions.slf4j,
-      specs: String = versions.specs,
-      mockito: String = versions.mockito,
+      hadoop: String     = versions.hadoop,
+      scalding: String   = versions.scalding,
+      algebird: String   = versions.algebird,
+      log4j: String      = versions.log4j,
+      slf4j: String      = versions.slf4j,
+      specs: String      = versions.specs,
+      mockito: String    = versions.mockito,
       scalacheck: String = versions.scalacheck,
-      scalaz: String = versions.scalaz,
-      pegdown: String = versions.pegdown,
-      classutil: String = versions.classutil
+      scalaz: String     = versions.scalaz,
+      pegdown: String    = versions.pegdown,
+      classutil: String  = versions.classutil
     ) =
       this.hadoop(hadoop) ++
-        this.scalding(scalding, algebird) ++
-        this.logging(log4j, slf4j) ++
-        this.testing(specs, mockito, scalacheck, scalaz, pegdown, classutil)
+      this.scalding(scalding, algebird) ++
+      this.logging(log4j, slf4j) ++
+      this.testing(specs, mockito, scalacheck, scalaz, pegdown, classutil)
 
     def hadoop(version: String = versions.hadoop) = Seq(
       "org.apache.hadoop"        %  "hadoop-client"                 % version        % "provided",
@@ -96,10 +95,14 @@ object UniformDependencyPlugin extends Plugin {
     )
 
     def shapeless(version: String = versions.shapeless) = Seq(
-      "com.chuusai"               % "shapeless_2.10.3"              % version
+      "com.chuusai"              % "shapeless_2.10.3"               % version
     )
 
-    def testing(specs: String = versions.specs, mockito: String = versions.mockito, scalacheck: String = versions.scalacheck, scalaz: String = versions.scalaz, pegdown: String = versions.pegdown, classutil: String = versions.classutil) = Seq(
+    def testing(
+      specs: String = versions.specs, mockito: String = versions.mockito,
+      scalacheck: String = versions.scalacheck, scalaz: String = versions.scalaz,
+      pegdown: String = versions.pegdown, classutil: String = versions.classutil
+    ) = Seq(
       "org.specs2"               %% "specs2"                        % specs       % "test",
       "org.mockito"              %  "mockito-all"                   % mockito     % "test",
       "org.scalacheck"           %% "scalacheck"                    % scalacheck  % "test",
@@ -129,8 +132,8 @@ object UniformDependencyPlugin extends Plugin {
     )
 
     def scrooge(scrooge: String = versions.scrooge, bijection: String = versions.bijection) = Seq(
-      "com.twitter"       %% "scrooge-core"                         % scrooge,
-      "com.twitter"       %% "bijection-scrooge"                    % bijection
+      "com.twitter"              %% "scrooge-core"                  % scrooge,
+      "com.twitter"              %% "bijection-scrooge"             % bijection
     )
 
     def parquet(version: String = versions.parquet) = Seq(
