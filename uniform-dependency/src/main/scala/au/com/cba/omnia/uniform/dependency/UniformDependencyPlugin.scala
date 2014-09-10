@@ -119,9 +119,9 @@ object UniformDependencyPlugin extends Plugin {
     )
 
     def logging(log4j: String = versions.log4j, slf4j: String = versions.slf4j) = Seq(
-      "log4j"                    %  "log4j"                         % log4j,
-      "org.slf4j"                %  "slf4j-api"                     % slf4j,
-      "org.slf4j"                %  "slf4j-log4j12"                 % slf4j
+      "log4j"                    %  "log4j"                         % log4j       % "provided",
+      "org.slf4j"                %  "slf4j-api"                     % slf4j       % "provided",
+      "org.slf4j"                %  "slf4j-log4j12"                 % slf4j       % "provided"
     )
 
     def scallop(version: String = versions.scallop) = Seq(
