@@ -86,7 +86,7 @@ object build extends Build {
   , settings = standardSettings ++ Seq[Sett](
       name := "uniform-dependency"
     )
-  )
+  ).dependsOn(core)
 
   def ghsettings: Seq[sbt.Setting[_]] =
     unidocSettings ++ site.settings ++ Seq(

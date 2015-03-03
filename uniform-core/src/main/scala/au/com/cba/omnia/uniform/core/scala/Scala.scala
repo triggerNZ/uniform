@@ -12,33 +12,9 @@
 //   See the License for the specific language governing permissions and
 //   limitations under the License.
 
-package au.com.cba.omnia.uniform.core
-package setting
+package au.com.cba.omnia.uniform.core.scala
 
-import sbt._
-import Keys._
-
-import au.com.cba.omnia.uniform.core.scala.Scala
-
-object ScalaSettings extends Plugin {
-  object scala {
-    def settings = Seq(
-      scalaVersion := Scala.version,
-      crossScalaVersions := Seq(Scala.version),
-      scalacOptions ++= Seq(
-        "-deprecation",
-        "-unchecked",
-        "-Ywarn-all",
-        "-Xlint",
-        "-feature",
-        "-language:_",
-        "-target:jvm-1.7"
-      ),
-      javacOptions ++= Seq(
-        "-Xlint:unchecked",
-        "-source", "1.7",
-        "-target", "1.7"
-      )
-    )
-  }
+object Scala {
+  val version = "2.10.5"
+  val binaryVersion = "2.10"
 }
