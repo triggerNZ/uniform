@@ -15,12 +15,13 @@
 package au.com.cba.omnia.uniform.assembly
 
 import sbt._, Keys._
-import sbtassembly.Plugin._, AssemblyKeys._
+import sbtassembly.AssemblyPlugin.autoImport._
+import sbtassembly.MergeStrategy
 
 object UniformAssemblyPlugin extends Plugin {
   def uniformAssemblySettings: Seq[Sett] =
-    assemblySettings ++ Seq[Sett](
-      mergeStrategy in assembly <<= (mergeStrategy in assembly)(defaultMergeStrategy),
+    baseAssemblySettings ++ Seq[Sett](
+      assemblyMergeStrategy in assembly <<= (assemblyMergeStrategy in assembly)(defaultMergeStrategy),
       test in assembly := {},
       (artifact in (Compile, assembly) ~= { art =>
         art.copy(`classifier` = Some("assembly"))
