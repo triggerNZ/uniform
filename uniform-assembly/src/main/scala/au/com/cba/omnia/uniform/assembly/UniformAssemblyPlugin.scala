@@ -35,6 +35,8 @@ object UniformAssemblyPlugin extends Plugin {
     case "META-INF/NOTICE.txt" => MergeStrategy.rename
     case "META-INF/LICENSE.txt" => MergeStrategy.rename
     case "META-INF/MANIFEST.MF" => MergeStrategy.discard
+    case "application.conf" => MergeStrategy.concat
+    case "reference.conf"   => MergeStrategy.concat
     case PathList("META-INF", xs) if xs.toLowerCase.endsWith(".dsa") => MergeStrategy.discard
     case PathList("META-INF", xs) if xs.toLowerCase.endsWith(".rsa") => MergeStrategy.discard
     case PathList("META-INF", xs) if xs.toLowerCase.endsWith(".sf") => MergeStrategy.discard
