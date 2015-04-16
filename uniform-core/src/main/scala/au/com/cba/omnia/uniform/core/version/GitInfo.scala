@@ -19,13 +19,43 @@ import java.io.File
 
 import sbt._, Keys._
 
+sealed abstract class GitStatus {
+  def show() = this match {
+    case NotAGitRepository => "UNTRACKED"
+    case Dirty(hash)       => hash + "-SNAPSHOT"
+    case Clean(hash)       => hash 
+  }
+}
+
+case object NotAGitRepository extends GitStatus
+
+case class Clean(hash: String) extends GitStatus
+
+case class Dirty(hash: String) extends GitStatus
+
 object GitInfo {
-  def commish(root: File) =
+  def commish(root: File): GitStatus =
     gitlog(root, "%h")
 
-  def commit(root: File) =
+  def commit(root: File): GitStatus =
     gitlog(root, "%H")
 
-  def gitlog(root: File, format: String) =
-    Process("git log --pretty=format:" + format + " -n  1", Some(root)).lines.head
+  def gitlog(root: File, format: String): GitStatus = {
+    if (isGitRepository(root)) {
+      val lastCommit = Process("git log --pretty=format:" + format + " -n  1", Some(root)).lines.head
+      if (isGitRepositoryDirty(root)) {
+        Dirty(lastCommit)
+      } else {
+        Clean(lastCommit)
+      }
+    } else {
+      NotAGitRepository
+    }
+  }
+
+  def isGitRepository(root: File): Boolean =
+    Process("git status", Some(root)).! == 0
+
+  def isGitRepositoryDirty(root: File): Boolean =
+    Process("git status --porcelain", Some(root)).lines.nonEmpty
 }

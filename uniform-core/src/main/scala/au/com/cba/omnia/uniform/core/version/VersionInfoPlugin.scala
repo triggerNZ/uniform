@@ -35,10 +35,10 @@ object VersionInfoPlugin extends Plugin {
                        |  val version = "%s"
                        |  val git = "%s"
                        |  val date = "%s"
-                       |}""".stripMargin.format(pkg, version, commit(base), timestamp(now)))
+                       |}""".stripMargin.format(pkg, version, commit(base).show(), timestamp(now)))
       IO.write(txt, """VERSION=%s
                        |GIT=%s
-                       |DATE=%s""".stripMargin.format(version, commit(base), timestamp(now)))
+                       |DATE=%s""".stripMargin.format(version, commit(base).show(), timestamp(now)))
       Seq(scala)
     })
   )
