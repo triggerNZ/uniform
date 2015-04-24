@@ -15,7 +15,7 @@
 package au.com.cba.omnia.uniform.core
 package version
 
-import java.io.File
+import _root_.scala.Console.{RED, BOLD, RESET}
 
 import sbt._, Keys._
 
@@ -32,6 +32,13 @@ case object NotAGitRepository extends GitStatus
 case class Clean(hash: String) extends GitStatus
 
 case class Dirty(hash: String) extends GitStatus
+
+/** Logs any STDERR output in bold red and discards STDOUT output */
+object OnlyLogStdErr extends ProcessLogger {
+  override def buffer[T](f: => T)  = f
+  override def error(s: => String) = println(s"${RED}${BOLD}${s}${RESET}")
+  override def info(s: => String)  = {}
+}
 
 object GitInfo {
   def commish(root: File): GitStatus =
@@ -54,7 +61,7 @@ object GitInfo {
   }
 
   def isGitRepository(root: File): Boolean =
-    Process("git status", Some(root)).! == 0
+    Process("git status", Some(root)).!(OnlyLogStdErr) == 0
 
   def isGitRepositoryDirty(root: File): Boolean =
     Process("git status --porcelain", Some(root)).lines.nonEmpty
