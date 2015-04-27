@@ -21,11 +21,18 @@ import Keys._
 import au.com.cba.omnia.uniform.core.scala.Scala
 
 object ScalaSettings extends Plugin {
+  lazy val uniformJvmTarget = SettingKey[String](
+    "uniform-jvm-target",
+    "The JVM version targetted by scala and java compilers"
+  )
+
   object scala {
+
     def settings = Seq(
-      scalaVersion := Scala.version,
+      scalaVersion       := Scala.version,
       crossScalaVersions := Seq(Scala.version),
-      scalacOptions ++= Seq(
+      uniformJvmTarget   := Scala.jvmVersion,
+      scalacOptions <++= uniformJvmTarget.map(jvmTarget => Seq(
         "-deprecation",
         "-unchecked",
         "-Xlint",
@@ -34,13 +41,13 @@ object ScalaSettings extends Plugin {
         "-Ywarn-unused-import",
         "-feature",
         "-language:_",
-        "-target:jvm-1.7"
-      ),
-      javacOptions ++= Seq(
+        s"-target:jvm-$jvmTarget"
+      )),
+      javacOptions <++= uniformJvmTarget.map(jvmTarget => Seq(
         "-Xlint:unchecked",
-        "-source", "1.7",
-        "-target", "1.7"
-      )
+        "-source", Scala.jvmVersion,
+        "-target", jvmTarget
+      ))
     )
   }
 }
