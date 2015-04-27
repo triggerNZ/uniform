@@ -2,7 +2,7 @@ uniform
 =======
 
 [![Build Status](https://travis-ci.org/CommBank/uniform.svg?branch=master)](https://travis-ci.org/CommBank/uniform)
-[![Gitter chat](https://badges.gitter.im/CommBank.png)](https://gitter.im/CommBank)
+[![Gitter chat](https://badges.gitter.im/CommBank/uniform.png)](https://gitter.im/CommBank/uniform)
 
 ```
 uniform: remaining the same in all cases and at all times; unchanging in form or character.
@@ -10,7 +10,7 @@ uniform: remaining the same in all cases and at all times; unchanging in form or
 
 An sbt plugin for maintaining uniform approach to building cba components.
 
-[Scaladoc](https://commbank.github.io/maestro/latest/api/index.html)
+[Scaladoc](https://commbank.github.io/uniform/latest/api/index.html)
 
 usage
 -----
