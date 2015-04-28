@@ -16,7 +16,20 @@ scala.settings
 
 uniformDependencySettings
 
+strictDependencySettings
+
 version := "0.1"
 
-libraryDependencies ++= depend.scaldingproject() ++ depend.scalaz() ++ depend.testing() ++
-                        depend.time() ++ depend.scallop() ++ depend.scrooge()
+libraryDependencies ++=
+  depend.hadoopClasspath ++
+  depend.hive()          ++
+  depend.scalaz()        ++
+  depend.scalazStream()  ++
+  depend.shapeless()     ++
+  depend.testing()       ++
+  depend.time()          ++
+  depend.scalding()      ++
+  depend.logging()       ++
+  depend.scallop()       ++
+  depend.scrooge()       ++
+  depend.parquet()
