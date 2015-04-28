@@ -15,6 +15,6 @@
 package au.com.cba.omnia.uniform.core.scala
 
 object Scala {
-  val version = "2.10.5"
-  val binaryVersion = "2.10"
+  val version       = "2.11.6"
+  val binaryVersion = version.substring(0, version.lastIndexOf('.'))
 }

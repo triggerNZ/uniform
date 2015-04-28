@@ -28,8 +28,10 @@ object ScalaSettings extends Plugin {
       scalacOptions ++= Seq(
         "-deprecation",
         "-unchecked",
-        "-Ywarn-all",
         "-Xlint",
+        "-Ywarn-dead-code",
+        "-Ywarn-value-discard",
+        "-Ywarn-unused-import",
         "-feature",
         "-language:_",
         "-target:jvm-1.7"

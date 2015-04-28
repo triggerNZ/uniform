@@ -38,7 +38,7 @@ object build extends Build {
       , "-language:_"
       , "-target:jvm-1.7"
       )
-        , updateOptions := updateOptions.value.withCachedResolution(true)
+    , updateOptions := updateOptions.value.withCachedResolution(true)
     ) ++ docSettings
 
   lazy val uniform = Project(
@@ -56,8 +56,8 @@ object build extends Build {
   , base = file("uniform-core")
   , settings = standardSettings ++ Seq[Sett](
       name := "uniform-core"
-    , addSbtPlugin("com.typesafe.sbt" % "sbt-site" % "0.8.1")
-    , addSbtPlugin("com.eed3si9n" % "sbt-unidoc" % "0.3.2")
+    , addSbtPlugin("com.typesafe.sbt" % "sbt-site"   % "0.8.1")
+    , addSbtPlugin("com.eed3si9n"     % "sbt-unidoc" % "0.3.2")
     )
   )
 
@@ -67,7 +67,7 @@ object build extends Build {
   , settings = standardSettings ++ Seq[Sett](
       name := "uniform-thrift"
     , resolvers += Resolver.sonatypeRepo("releases")
-    , addSbtPlugin("com.twitter" %% "scrooge-sbt-plugin" % "3.14.1")
+    , addSbtPlugin("com.twitter" %% "scrooge-sbt-plugin" % "3.16.3")
     )
   ).dependsOn(dependency)
 

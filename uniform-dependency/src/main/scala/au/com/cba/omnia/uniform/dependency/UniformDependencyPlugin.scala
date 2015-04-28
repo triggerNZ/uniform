@@ -197,20 +197,20 @@ object UniformDependencyPlugin extends Plugin {
       def jackson       = "1.8.8"
 
       // non-hadoop modules
-      def scalaz        = "7.1.0"
-      def scalazStream  = "0.5a"      // Needs to align with what is required by specs2
-      def specs         = "2.4.13"
-      def scalacheck    = "1.11.4"    // Needs to align with what is required by scalaz-scalacheck-binding and specs2
-      def shapeless     = "2.0.0-M1"  // Needs to align with what is required by specs2
-      def mockito       = "1.9.0"
-      def jodaTime      = "2.4"
-      def nscalaTime    = "1.2.0"
-      def scalding      = "0.12.0"
-      def cascading     = "2.5.5"     // Needs to align with what is required by scalding
-      def algebird      = "0.7.1"
+      def specs         = "3.5"
+      def scalaz        = "7.1.1"  // Needs to align with what is required by specs2
+      def scalazStream  = "0.7a"   // Needs to align with what is required by specs2
+      def shapeless     = "2.1.0"  // Needs to align with what is required by specs2
+      def scalacheck    = "1.12.2" // Needs to align with what is required by specs2
+      def mockito       = "1.9.5"  // Needs to align with what is required by specs2
+      def nscalaTime    = "1.8.0"
+      def jodaTime      = "2.7"    // Needs to align with what is required by nscala-time
+      def scalding      = "0.13.1"
+      def cascading     = "2.6.1"  // Needs to align with what is required by scalding
+      def algebird      = "0.9.0"  // Needs to align with what is required by scalding
+      def scrooge       = "3.17.0" // Needs to align with what is required by scalding
+      def bijection     = "0.7.2-OMNIA1" // Needs to align with what is required by scalding
       def scallop       = "0.9.5"
-      def scrooge       = "3.14.1"
-      def bijection     = "0.6.3"
       def objenesis     = "1.2"
     }
 
@@ -256,11 +256,12 @@ object UniformDependencyPlugin extends Plugin {
     )
 
     def scalazStream(version: String = versions.scalazStream) = Seq(
-      "org.scalaz.stream"        %% "scalaz-stream"                 % version
+      // Exclude scalaz since the versions are different
+      "org.scalaz.stream"        %% "scalaz-stream"                 % version exclude("org.scalaz", sv("scalaz-core")) exclude("org.scalaz", sv("scalaz-concurrent"))
     )
 
     def shapeless(version: String = versions.shapeless) = Seq(
-      "com.chuusai"              % "shapeless_2.10.3"               % version
+      "com.chuusai"              %% "shapeless"                     % version
     )
 
     def testing(
@@ -268,10 +269,11 @@ object UniformDependencyPlugin extends Plugin {
       scalacheck: String = versions.scalacheck, scalaz: String = versions.scalaz,
       asm: String = versions.asm
     ) = Seq(
-      "org.specs2"               %% "specs2"                        % specs       % "test" exclude("org.scalacheck", sv("scalacheck")) exclude("org.ow2.asm", "asm"),
-      "org.mockito"              %  "mockito-all"                   % mockito     % "test",
+      "org.specs2"               %% "specs2-core"                   % specs       % "test" exclude("org.ow2.asm", "asm"),
+      "org.specs2"               %% "specs2-scalacheck"             % specs       % "test" exclude("org.ow2.asm", "asm"),
       "org.scalacheck"           %% "scalacheck"                    % scalacheck  % "test",
-      "org.scalaz"               %% "scalaz-scalacheck-binding"     % scalaz      % "test",
+      "org.mockito"              %  "mockito-all"                   % mockito     % "test",
+      "org.scalaz"               %% "scalaz-scalacheck-binding"     % scalaz      % "test" exclude("org.scalacheck", sv("scalacheck")),
       "asm"                      %  "asm"                           % asm         % "test"
     )
 
@@ -280,9 +282,10 @@ object UniformDependencyPlugin extends Plugin {
       "com.github.nscala-time"   %% "nscala-time"                   % nscala exclude("joda-time", "joda-time")
     )
 
-    def scalding(scalding: String = versions.scalding, algebird: String = versions.algebird) = Seq(
-      noHadoop("com.twitter"     %% "scalding-core"                 % scalding),
-      "com.twitter"              %% "algebird-core"                 % algebird
+    def scalding(scalding: String = versions.scalding, algebird: String = versions.algebird, bijection: String = versions.bijection) = Seq(
+      noHadoop("com.twitter"     %% "scalding-core"                 % scalding exclude("com.twitter", sv("bijection-core"))),
+      "com.twitter"              %% "algebird-core"                 % algebird,
+      "com.twitter"              %% "bijection-core"                % bijection
     )
 
     def logging(log4j: String = versions.log4j, slf4j: String = versions.slf4j) = Seq(
