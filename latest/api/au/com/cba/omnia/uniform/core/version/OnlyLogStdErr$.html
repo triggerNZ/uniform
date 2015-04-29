@@ -2,9 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html>
         <head>
-          <title>GitInfo - au.com.cba.omnia.uniform.core.version.GitInfo</title>
-          <meta name="description" content="GitInfo - au.com.cba.omnia.uniform.core.version.GitInfo" />
-          <meta name="keywords" content="GitInfo au.com.cba.omnia.uniform.core.version.GitInfo" />
+          <title>OnlyLogStdErr - au.com.cba.omnia.uniform.core.version.OnlyLogStdErr</title>
+          <meta name="description" content="OnlyLogStdErr - au.com.cba.omnia.uniform.core.version.OnlyLogStdErr" />
+          <meta name="keywords" content="OnlyLogStdErr au.com.cba.omnia.uniform.core.version.OnlyLogStdErr" />
           <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
           
       <link href="../../../../../../../lib/template.css" media="screen" type="text/css" rel="stylesheet" />
@@ -12,7 +12,7 @@
       <script type="text/javascript">
          if(top === self) {
             var url = '../../../../../../../index.html';
-            var hash = 'au.com.cba.omnia.uniform.core.version.GitInfo$';
+            var hash = 'au.com.cba.omnia.uniform.core.version.OnlyLogStdErr$';
             var anchor = window.location.hash;
             var anchor_opt = '';
             if (anchor.length >= 1)
@@ -26,7 +26,7 @@
       <div id="definition">
         <img src="../../../../../../../lib/object_big.png" />
         <p id="owner"><a href="../../../../../../package.html" class="extype" name="au">au</a>.<a href="../../../../../package.html" class="extype" name="au.com">com</a>.<a href="../../../../package.html" class="extype" name="au.com.cba">cba</a>.<a href="../../../package.html" class="extype" name="au.com.cba.omnia">omnia</a>.<a href="../../package.html" class="extype" name="au.com.cba.omnia.uniform">uniform</a>.<a href="../package.html" class="extype" name="au.com.cba.omnia.uniform.core">core</a>.<a href="package.html" class="extype" name="au.com.cba.omnia.uniform.core.version">version</a></p>
-        <h1>GitInfo</h1>
+        <h1>OnlyLogStdErr</h1>
       </div>
 
       <h4 id="signature" class="signature">
@@ -35,13 +35,13 @@
         <span class="kind">object</span>
       </span>
       <span class="symbol">
-        <span class="name">GitInfo</span>
+        <span class="name">OnlyLogStdErr</span><span class="result"> extends <span class="extype" name="sbt.ProcessLogger">ProcessLogger</span></span>
       </span>
       </h4>
       
-          <div id="comment" class="fullcommenttop"><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/uniform/blob/master//uniform-core/src/main/scala/au/com/cba/omnia/uniform/core/version/GitInfo.scala" target="_blank">GitInfo.scala</a></dd></dl><div class="toggleContainer block">
+          <div id="comment" class="fullcommenttop"><div class="comment cmt"><p>Logs any STDERR output in bold red and discards STDOUT output</p></div><dl class="attributes block"> <dt>Source</dt><dd><a href="https://github.com/CommBank/uniform/blob/master//uniform-core/src/main/scala/au/com/cba/omnia/uniform/core/version/GitInfo.scala" target="_blank">GitInfo.scala</a></dd></dl><div class="toggleContainer block">
           <span class="toggle">Linear Supertypes</span>
-          <div class="superTypes hiddenContent"><span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
+          <div class="superTypes hiddenContent"><span class="extype" name="sbt.ProcessLogger">ProcessLogger</span>, <span class="extype" name="scala.AnyRef">AnyRef</span>, <span class="extype" name="scala.Any">Any</span></div>
         </div></div>
         
 
@@ -59,7 +59,7 @@
                 <span class="filtertype">Inherited<br />
                 </span>
                 <ol id="linearization">
-                  <li class="in" name="au.com.cba.omnia.uniform.core.version.GitInfo"><span>GitInfo</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
+                  <li class="in" name="au.com.cba.omnia.uniform.core.version.OnlyLogStdErr"><span>OnlyLogStdErr</span></li><li class="in" name="sbt.ProcessLogger"><span>ProcessLogger</span></li><li class="in" name="scala.AnyRef"><span>AnyRef</span></li><li class="in" name="scala.Any"><span>Any</span></li>
                 </ol>
               </div><div id="ancestors">
             <span class="filtertype"></span>
@@ -163,6 +163,19 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>Any</dd></dl></div>
+    </li><li name="au.com.cba.omnia.uniform.core.version.OnlyLogStdErr#buffer" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="buffer[T](f:=&gt;T):T"></a>
+      <a id="buffer[T](⇒T):T"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">buffer</span><span class="tparams">[<span name="T">T</span>]</span><span class="params">(<span name="f">f: ⇒ <span class="extype" name="au.com.cba.omnia.uniform.core.version.OnlyLogStdErr.buffer.T">T</span></span>)</span><span class="result">: <span class="extype" name="au.com.cba.omnia.uniform.core.version.OnlyLogStdErr.buffer.T">T</span></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="au.com.cba.omnia.uniform.core.version.OnlyLogStdErr">OnlyLogStdErr</a> → ProcessLogger</dd></dl></div>
     </li><li name="scala.AnyRef#clone" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="clone():Object"></a>
       <a id="clone():AnyRef"></a>
@@ -182,32 +195,6 @@
     </span>)</span>
               
         </dd></dl></div>
-    </li><li name="au.com.cba.omnia.uniform.core.version.GitInfo#commish" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="commish(root:sbt.File):au.com.cba.omnia.uniform.core.version.GitStatus"></a>
-      <a id="commish(File):GitStatus"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">commish</span><span class="params">(<span name="root">root: <a href="../../../../../../../sbt/package.html#File=java.io.File" class="extmbr" name="sbt.File">File</a></span>)</span><span class="result">: <a href="GitStatus.html" class="extype" name="au.com.cba.omnia.uniform.core.version.GitStatus">GitStatus</a></span>
-      </span>
-      </h4>
-      
-    </li><li name="au.com.cba.omnia.uniform.core.version.GitInfo#commit" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="commit(root:sbt.File):au.com.cba.omnia.uniform.core.version.GitStatus"></a>
-      <a id="commit(File):GitStatus"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">commit</span><span class="params">(<span name="root">root: <a href="../../../../../../../sbt/package.html#File=java.io.File" class="extmbr" name="sbt.File">File</a></span>)</span><span class="result">: <a href="GitStatus.html" class="extype" name="au.com.cba.omnia.uniform.core.version.GitStatus">GitStatus</a></span>
-      </span>
-      </h4>
-      
     </li><li name="scala.AnyRef#eq" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="eq(x$1:AnyRef):Boolean"></a>
       <a id="eq(AnyRef):Boolean"></a>
@@ -234,6 +221,19 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
+    </li><li name="au.com.cba.omnia.uniform.core.version.OnlyLogStdErr#error" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="error(s:=&gt;String):Unit"></a>
+      <a id="error(⇒String):Unit"></a>
+      <h4 class="signature">
+      <span class="modifier_kind">
+        <span class="modifier"></span>
+        <span class="kind">def</span>
+      </span>
+      <span class="symbol">
+        <span class="name">error</span><span class="params">(<span name="s">s: ⇒ <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
+      </span>
+      </h4>
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="au.com.cba.omnia.uniform.core.version.OnlyLogStdErr">OnlyLogStdErr</a> → ProcessLogger</dd></dl></div>
     </li><li name="scala.AnyRef#finalize" visbl="prt" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="finalize():Unit"></a>
       <a id="finalize():Unit"></a>
@@ -266,19 +266,6 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="au.com.cba.omnia.uniform.core.version.GitInfo#gitlog" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="gitlog(root:sbt.File,format:String):au.com.cba.omnia.uniform.core.version.GitStatus"></a>
-      <a id="gitlog(File,String):GitStatus"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">gitlog</span><span class="params">(<span name="root">root: <a href="../../../../../../../sbt/package.html#File=java.io.File" class="extmbr" name="sbt.File">File</a></span>, <span name="format">format: <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="GitStatus.html" class="extype" name="au.com.cba.omnia.uniform.core.version.GitStatus">GitStatus</a></span>
-      </span>
-      </h4>
-      
     </li><li name="scala.AnyRef#hashCode" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="hashCode():Int"></a>
       <a id="hashCode():Int"></a>
@@ -292,32 +279,19 @@
       </span>
       </h4>
       <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd>AnyRef → Any</dd></dl></div>
-    </li><li name="au.com.cba.omnia.uniform.core.version.GitInfo#isGitRepository" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="isGitRepository(root:sbt.File):Boolean"></a>
-      <a id="isGitRepository(File):Boolean"></a>
+    </li><li name="au.com.cba.omnia.uniform.core.version.OnlyLogStdErr#info" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
+      <a id="info(s:=&gt;String):Unit"></a>
+      <a id="info(⇒String):Unit"></a>
       <h4 class="signature">
       <span class="modifier_kind">
         <span class="modifier"></span>
         <span class="kind">def</span>
       </span>
       <span class="symbol">
-        <span class="name">isGitRepository</span><span class="params">(<span name="root">root: <a href="../../../../../../../sbt/package.html#File=java.io.File" class="extmbr" name="sbt.File">File</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
+        <span class="name">info</span><span class="params">(<span name="s">s: ⇒ <span class="extype" name="scala.Predef.String">String</span></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Unit" class="extype" target="_top">Unit</a></span>
       </span>
       </h4>
-      
-    </li><li name="au.com.cba.omnia.uniform.core.version.GitInfo#isGitRepositoryDirty" visbl="pub" data-isabs="false" fullComment="no" group="Ungrouped">
-      <a id="isGitRepositoryDirty(root:sbt.File):Boolean"></a>
-      <a id="isGitRepositoryDirty(File):Boolean"></a>
-      <h4 class="signature">
-      <span class="modifier_kind">
-        <span class="modifier"></span>
-        <span class="kind">def</span>
-      </span>
-      <span class="symbol">
-        <span class="name">isGitRepositoryDirty</span><span class="params">(<span name="root">root: <a href="../../../../../../../sbt/package.html#File=java.io.File" class="extmbr" name="sbt.File">File</a></span>)</span><span class="result">: <a href="http://www.scala-lang.org/api/2.10.5/index.html#scala.Boolean" class="extype" target="_top">Boolean</a></span>
-      </span>
-      </h4>
-      
+      <div class="fullcomment"><dl class="attributes block"> <dt>Definition Classes</dt><dd><a href="" class="extype" name="au.com.cba.omnia.uniform.core.version.OnlyLogStdErr">OnlyLogStdErr</a> → ProcessLogger</dd></dl></div>
     </li><li name="scala.Any#isInstanceOf" visbl="pub" data-isabs="false" fullComment="yes" group="Ungrouped">
       <a id="isInstanceOf[T0]:Boolean"></a>
       <a id="isInstanceOf[T0]:Boolean"></a>
@@ -462,7 +436,9 @@
         </div>
 
         <div id="inheritedMembers">
-        <div class="parent" name="scala.AnyRef">
+        <div class="parent" name="sbt.ProcessLogger">
+              <h3>Inherited from <span class="extype" name="sbt.ProcessLogger">ProcessLogger</span></h3>
+            </div><div class="parent" name="scala.AnyRef">
               <h3>Inherited from <span class="extype" name="scala.AnyRef">AnyRef</span></h3>
             </div><div class="parent" name="scala.Any">
               <h3>Inherited from <span class="extype" name="scala.Any">Any</span></h3>
