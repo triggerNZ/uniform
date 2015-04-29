@@ -14,28 +14,14 @@
 
 package au.com.cba.omnia.uniform.thrift
 
+import au.com.cba.omnia.uniform.dependency.UniformDependencyPlugin._
+import com.twitter.scrooge.ScroogeSBT._
 import sbt._, Keys._
 
-import com.twitter.scrooge.ScroogeSBT._
-
-import au.com.cba.omnia.uniform.core.scala.Scala
-
-import au.com.cba.omnia.uniform.dependency.UniformDependencyPlugin._
-
 object UniformThriftPlugin extends Plugin {
-
-  lazy val uniformThriftJvmTarget = SettingKey[String](
-    "uniform-thrift-jvm-target",
-    "The JVM version targetted by the scrooge thrift plugin"
+  def uniformThriftSettings: Seq[Sett] = newSettings ++ Seq[Sett](
+    libraryDependencies ++= depend.scrooge(),
+    // Force scrooge-gen to always be run (it is buggy w.r.t. picking up changes to new thrift files).
+    (scroogeIsDirty in Compile) <<= (scroogeIsDirty in Compile) map { (_) => true }
   )
-
-  def uniformThriftSettings: Seq[Sett] =
-    newSettings ++
-    Seq[Sett](
-      uniformThriftJvmTarget := Scala.jvmVersion,
-      scroogeBuildOptions in Compile <+= uniformThriftJvmTarget.apply(jvmTarget => s"-target:jvm-$jvmTarget"),
-      libraryDependencies ++= depend.scrooge(),
-      // Force scrooge-gen to always be run (it is buggy w.r.t. picking up changes to new thrift files).
-      (scroogeIsDirty in Compile) <<= (scroogeIsDirty in Compile) map { (_) => true }
-    )
 }
