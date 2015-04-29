@@ -201,7 +201,7 @@ object UniformDependencyPlugin extends Plugin {
       def scalaz        = "7.1.1"  // Needs to align with what is required by specs2
       def scalazStream  = "0.7a"   // Needs to align with what is required by specs2
       def shapeless     = "2.1.0"  // Needs to align with what is required by specs2
-      def scalacheck    = "1.12.2" // Needs to align with what is required by specs2
+      def scalacheck    = "1.11.4" // Downgrade to a version that works with both specs2 and scalaz
       def mockito       = "1.9.5"  // Needs to align with what is required by specs2
       def nscalaTime    = "1.8.0"
       def jodaTime      = "2.7"    // Needs to align with what is required by nscala-time
@@ -270,8 +270,8 @@ object UniformDependencyPlugin extends Plugin {
       asm: String = versions.asm
     ) = Seq(
       "org.specs2"               %% "specs2-core"                   % specs       % "test" exclude("org.ow2.asm", "asm"),
-      "org.specs2"               %% "specs2-scalacheck"             % specs       % "test" exclude("org.ow2.asm", "asm"),
-      "org.scalacheck"           %% "scalacheck"                    % scalacheck  % "test",
+      "org.specs2"               %% "specs2-scalacheck"             % specs       % "test" exclude("org.ow2.asm", "asm") exclude("org.scalacheck", sv("scalacheck")),
+      "org.scalacheck"           %% "scalacheck"                    % scalacheck  % "test" exclude ("org.scala-lang.modules", sv("scala-parser-combinators")),
       "org.mockito"              %  "mockito-all"                   % mockito     % "test",
       "org.scalaz"               %% "scalaz-scalacheck-binding"     % scalaz      % "test" exclude("org.scalacheck", sv("scalacheck")),
       "asm"                      %  "asm"                           % asm         % "test"

@@ -25,7 +25,7 @@ object Test extends Specification with ScalaCheck { def is = s2"""
 
 """
 
-  def test = prop((s: String \/ Int) =>
+  def test = prop((s: ValidationNel[String, Int]) =>
     s must_== s
   )
 }
