@@ -174,6 +174,8 @@ object UniformDependencyPlugin extends Plugin {
         .map(m => ExclusionRule(m.organization, m.name))
   }
 
+  def sv(module: String): String = s"${module}_${Scala.binaryVersion}"
+
   object depend {
     object versions {
       // cloudera modules
@@ -225,13 +227,12 @@ object UniformDependencyPlugin extends Plugin {
       mockito: String    = versions.mockito,
       scalacheck: String = versions.scalacheck,
       scalaz: String     = versions.scalaz,
-      asm: String        = versions.asm,
-      scalaBin: String   = Scala.binaryVersion
+      asm: String        = versions.asm
     ) =
       this.hadoop(hadoop) ++
       this.scalding(scalding, algebird) ++
       this.logging(log4j, slf4j) ++
-      this.testing(specs, mockito, scalacheck, scalaz, asm, scalaBin)
+      this.testing(specs, mockito, scalacheck, scalaz, asm)
 
     /**
       * The modules provided in the hadoop classpath, as provided intransitive dependencies
@@ -265,9 +266,9 @@ object UniformDependencyPlugin extends Plugin {
     def testing(
       specs: String = versions.specs, mockito: String = versions.mockito,
       scalacheck: String = versions.scalacheck, scalaz: String = versions.scalaz,
-      asm: String = versions.asm, scalaBin: String = Scala.binaryVersion
+      asm: String = versions.asm
     ) = Seq(
-      "org.specs2"               %% "specs2"                        % specs       % "test" exclude("org.scalacheck", s"scalacheck_$scalaBin") exclude("org.ow2.asm", "asm"),
+      "org.specs2"               %% "specs2"                        % specs       % "test" exclude("org.scalacheck", sv("scalacheck")) exclude("org.ow2.asm", "asm"),
       "org.mockito"              %  "mockito-all"                   % mockito     % "test",
       "org.scalacheck"           %% "scalacheck"                    % scalacheck  % "test",
       "org.scalaz"               %% "scalaz-scalacheck-binding"     % scalaz      % "test",
@@ -294,9 +295,9 @@ object UniformDependencyPlugin extends Plugin {
       "org.rogach"               %% "scallop"                       % version
     )
 
-    def scrooge(scrooge: String = versions.scrooge, bijection: String = versions.bijection, scalaBin: String = Scala.binaryVersion) = Seq(
+    def scrooge(scrooge: String = versions.scrooge, bijection: String = versions.bijection) = Seq(
       "com.twitter"              %% "scrooge-core"                  % scrooge,
-      "com.twitter"              %% "bijection-scrooge"             % bijection exclude("com.twitter", s"scrooge-core_$scalaBin")
+      "com.twitter"              %% "bijection-scrooge"             % bijection exclude("com.twitter", sv("scrooge-core"))
     ) map (noHadoop(_))
 
     def parquet(version: String = versions.parquet) = Seq(
