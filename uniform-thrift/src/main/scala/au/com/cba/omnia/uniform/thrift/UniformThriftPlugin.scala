@@ -21,6 +21,9 @@ import sbt._, Keys._
 object UniformThriftPlugin extends Plugin {
   def uniformThriftSettings: Seq[Sett] = newSettings ++ Seq[Sett](
     libraryDependencies ++= depend.scrooge(),
+    // Work around https://github.com/twitter/scrooge/issues/188
+    (scroogeThriftOutputFolder in Compile) <<= (sourceManaged in Compile) (_ / "scrooge"),
+    (scroogeThriftOutputFolder in Test) <<= (sourceManaged in Test) (_ / "scrooge"),
     // Force scrooge-gen to always be run (it is buggy w.r.t. picking up changes to new thrift files).
     (scroogeIsDirty in Compile) <<= (scroogeIsDirty in Compile) map { (_) => true }
   )
