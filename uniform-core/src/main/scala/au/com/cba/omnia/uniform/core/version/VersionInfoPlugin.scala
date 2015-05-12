@@ -27,18 +27,28 @@ object VersionInfoPlugin extends Plugin {
   lazy val rootPackage = SettingKey[String]("root-package")
 
   lazy val versionInfoSettings: Seq[Sett] = Seq[Sett](
-    (sourceGenerators in Compile) <+= (sourceManaged in Compile, target, name, version, baseDirectory, rootPackage).map((src, target, name, version, base, pkg) => {
+    (sourceGenerators in Compile) <+= (sourceManaged in Compile, target, version, baseDirectory, rootPackage, sourceGenerators in Compile).map((src, target, version, base, pkg, gen) => {
       val scala = src / "info.scala"
-      val txt = target / "VERSION.txt"
-      IO.write(scala, """package %s
-                       |object VersionInfo {
-                       |  val version = "%s"
-                       |  val git = "%s"
-                       |  val date = "%s"
-                       |}""".stripMargin.format(pkg, version, commit(base).show(), timestamp(now)))
-      IO.write(txt, """VERSION=%s
-                       |GIT=%s
-                       |DATE=%s""".stripMargin.format(version, commit(base).show(), timestamp(now)))
+      val txt   = target / "VERSION.txt"
+
+      IO.write(
+        scala,
+        s"""package $pkg
+           |
+           |object VersionInfo {
+           |  val version = "$version"
+           |  val git     = "${commit(base).show}"
+           |  val date    = "${timestamp(now)}"
+           |}""".stripMargin
+      )
+
+      IO.write(
+        txt,
+        s"""VERSION=$version
+           |GIT=${commit(base).show}
+           |DATE=${timestamp(now)}""".stripMargin
+      )
+
       Seq(scala)
     })
   )
