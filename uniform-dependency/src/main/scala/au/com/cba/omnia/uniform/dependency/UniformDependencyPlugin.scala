@@ -267,14 +267,14 @@ object UniformDependencyPlugin extends Plugin {
     def testing(
       specs: String = versions.specs, mockito: String = versions.mockito,
       scalacheck: String = versions.scalacheck, scalaz: String = versions.scalaz,
-      asm: String = versions.asm
+      asm: String = versions.asm, configuration: String = "test"
     ) = Seq(
-      "org.specs2"               %% "specs2-core"                   % specs       % "test" exclude("org.ow2.asm", "asm"),
-      "org.specs2"               %% "specs2-scalacheck"             % specs       % "test" exclude("org.ow2.asm", "asm") exclude("org.scalacheck", sv("scalacheck")),
-      "org.scalacheck"           %% "scalacheck"                    % scalacheck  % "test" exclude ("org.scala-lang.modules", sv("scala-parser-combinators")),
-      "org.mockito"              %  "mockito-all"                   % mockito     % "test",
-      "org.scalaz"               %% "scalaz-scalacheck-binding"     % scalaz      % "test" exclude("org.scalacheck", sv("scalacheck")),
-      "asm"                      %  "asm"                           % asm         % "test"
+      "org.specs2"               %% "specs2-core"                   % specs       % configuration exclude("org.ow2.asm", "asm"),
+      "org.specs2"               %% "specs2-scalacheck"             % specs       % configuration exclude("org.ow2.asm", "asm") exclude("org.scalacheck", sv("scalacheck")),
+      "org.scalacheck"           %% "scalacheck"                    % scalacheck  % configuration exclude("org.scala-lang.modules", sv("scala-parser-combinators")),
+      "org.mockito"              %  "mockito-all"                   % mockito     % configuration,
+      "org.scalaz"               %% "scalaz-scalacheck-binding"     % scalaz      % configuration exclude("org.scalacheck", sv("scalacheck")),
+      "asm"                      %  "asm"                           % asm         % configuration
     )
 
     def time(joda: String = versions.jodaTime, nscala: String = versions.nscalaTime) = Seq(
