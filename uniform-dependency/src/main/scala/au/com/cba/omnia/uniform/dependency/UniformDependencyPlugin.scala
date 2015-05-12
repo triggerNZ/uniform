@@ -202,7 +202,6 @@ object UniformDependencyPlugin extends Plugin {
       def scalazStream  = "0.7a"   // Needs to align with what is required by specs2
       def shapeless     = "2.1.0"  // Needs to align with what is required by specs2
       def scalacheck    = "1.11.4" // Downgrade to a version that works with both specs2 and scalaz
-      def mockito       = "1.9.5"  // Needs to align with what is required by specs2
       def nscalaTime    = "1.8.0"
       def jodaTime      = "2.7"    // Needs to align with what is required by nscala-time
       def scalding      = "0.13.1"
@@ -224,7 +223,6 @@ object UniformDependencyPlugin extends Plugin {
       log4j: String      = versions.log4j,
       slf4j: String      = versions.slf4j,
       specs: String      = versions.specs,
-      mockito: String    = versions.mockito,
       scalacheck: String = versions.scalacheck,
       scalaz: String     = versions.scalaz,
       asm: String        = versions.asm
@@ -232,7 +230,7 @@ object UniformDependencyPlugin extends Plugin {
       this.hadoop(hadoop) ++
       this.scalding(scalding, algebird) ++
       this.logging(log4j, slf4j) ++
-      this.testing(specs, mockito, scalacheck, scalaz, asm)
+      this.testing(specs, scalacheck, scalaz, asm)
 
     /**
       * The modules provided in the hadoop classpath, as provided intransitive dependencies
@@ -265,14 +263,13 @@ object UniformDependencyPlugin extends Plugin {
     )
 
     def testing(
-      specs: String = versions.specs, mockito: String = versions.mockito,
-      scalacheck: String = versions.scalacheck, scalaz: String = versions.scalaz,
-      asm: String = versions.asm, configuration: String = "test"
+      specs: String = versions.specs, scalacheck: String = versions.scalacheck,
+      scalaz: String = versions.scalaz, asm: String = versions.asm,
+      configuration: String = "test"
     ) = Seq(
       "org.specs2"               %% "specs2-core"                   % specs       % configuration exclude("org.ow2.asm", "asm"),
       "org.specs2"               %% "specs2-scalacheck"             % specs       % configuration exclude("org.ow2.asm", "asm") exclude("org.scalacheck", sv("scalacheck")),
       "org.scalacheck"           %% "scalacheck"                    % scalacheck  % configuration exclude("org.scala-lang.modules", sv("scala-parser-combinators")),
-      "org.mockito"              %  "mockito-all"                   % mockito     % configuration,
       "org.scalaz"               %% "scalaz-scalacheck-binding"     % scalaz      % configuration exclude("org.scalacheck", sv("scalacheck")),
       "asm"                      %  "asm"                           % asm         % configuration
     )
