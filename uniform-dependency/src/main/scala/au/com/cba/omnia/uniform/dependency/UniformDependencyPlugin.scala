@@ -213,8 +213,8 @@ object UniformDependencyPlugin extends Plugin {
       def objenesis     = "1.2"
     }
 
-    def omnia(project: String, version: String): Seq[ModuleID] =
-      Seq("au.com.cba.omnia" %% project % version)
+    def omnia(project: String, version: String, configuration: String = "compile"): Seq[ModuleID] =
+      Seq("au.com.cba.omnia" %% project % version % configuration)
 
     def scaldingproject(
       hadoop: String     = versions.hadoop,
