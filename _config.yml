@@ -2,4 +2,4 @@ name: uniform
 exclude: [Gemfile]
 markdown: kramdown
 
-releaseVersion:  "1.2.3-20150512045744-cef95d6"
+releaseVersion:  "1.2.4-20150513065051-9b4cf64"
