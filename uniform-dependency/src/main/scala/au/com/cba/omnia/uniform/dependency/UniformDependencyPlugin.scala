@@ -19,7 +19,9 @@ import sbt._, Keys._
 import au.com.cba.omnia.uniform.core.scala.Scala
 
 object UniformDependencyPlugin extends Plugin {
-  def uniformDependencySettings: Seq[Sett] = Seq[Sett](
+  def uniformDependencySettings: Seq[Sett] = uniformPublicDependencySettings ++ uniformPrivateDependencySettings
+
+  def uniformPublicDependencySettings: Seq[Sett] = Seq[Sett](
     resolvers ++= Seq(
       "snapshots" at "http://oss.sonatype.org/content/repositories/snapshots"
     , "releases" at "http://oss.sonatype.org/content/repositories/releases"
@@ -29,10 +31,12 @@ object UniformDependencyPlugin extends Plugin {
     , "Hadoop Releases" at "https://repository.cloudera.com/content/repositories/releases/"
     , "cloudera" at "https://repository.cloudera.com/artifactory/cloudera-repos/"
     , "commbank-releases" at "http://commbank.artifactoryonline.com/commbank/ext-releases-local"
-    , "commbank-releases-private" at "https://commbank.artifactoryonline.com/commbank/libs-releases-local"
     , "scalaz-bintray" at "http://dl.bintray.com/scalaz/releases"
     )
   )
+
+  def uniformPrivateDependencySettings: Seq[Sett] = Seq[Sett](
+    resolvers += "commbank-releases-private" at "https://commbank.artifactoryonline.com/commbank/libs-releases-local")
 
   /**
     * Enable strict conflict management
