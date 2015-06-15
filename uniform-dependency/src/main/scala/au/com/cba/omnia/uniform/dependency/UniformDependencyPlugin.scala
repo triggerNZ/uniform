@@ -170,7 +170,8 @@ object UniformDependencyPlugin extends Plugin {
     // so we exclude these as well
     val interferingModules = List[ModuleID](
       "org.apache.hadoop"            % "hadoop-mapreduce-client-core"   % depend.versions.hadoopNoMr1,
-      "org.apache.hadoop"            % "hadoop-mapreduce-client-common" % depend.versions.hadoopNoMr1
+      "org.apache.hadoop"            % "hadoop-mapreduce-client-common" % depend.versions.hadoopNoMr1,
+      "org.apache.hadoop"            % "hadoop-client"                  % depend.versions.hadoopNoMr1
     )
 
     val exclusions =
