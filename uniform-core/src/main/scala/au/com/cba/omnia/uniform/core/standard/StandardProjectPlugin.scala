@@ -22,7 +22,7 @@ import sbtunidoc.Plugin._, UnidocKeys._
 import com.typesafe.sbt.SbtSite._, SiteKeys._
 
 import au.com.cba.omnia.uniform.core.setting.ScalaSettings.scala
-import au.com.cba.omnia.uniform.core.version.GitInfo.commit
+import au.com.cba.omnia.uniform.core.version.{GitInfo, NotAGitRepository, Dirty, Clean}
 import au.com.cba.omnia.uniform.core.version.VersionInfoPlugin.{versionInfoSettings, rootPackage}
 
 object StandardProjectPlugin extends Plugin {
@@ -64,8 +64,18 @@ object StandardProjectPlugin extends Plugin {
         includeFilter in makeSite := "*.html" | "*.css" | "*.png" | "*.jpg" | "*.gif" | "*.js" | "*.swf" | "*.md" | "*.yml",
         apiURL <<= (baseDirectory).apply(base => Some(url(s"https://commbank.github.io/${base.getName}/latest/api"))),
         scalacOptions in (ScalaUnidoc, unidoc) <++= (version, baseDirectory).map { (v, base) =>
-          val docSourceUrl = s"https://github.com/CommBank/${base.getName}/tree/${commit(base)}/€{FILE_PATH}.scala"
-          Seq("-sourcepath", base.getAbsolutePath, "-doc-source-url", docSourceUrl)
+          val hash = GitInfo.commit(base) match {
+            case NotAGitRepository => Option.empty
+            case Dirty(hash)       => Option(hash)
+            case Clean(hash)       => Option(hash)
+          }
+
+          val urlSettings = hash.map { h =>
+            val docSourceUrl = s"https://github.com/CommBank/${base.getName}/tree/$h/€{FILE_PATH}.scala"
+            Seq("-doc-source-url", docSourceUrl)
+          }.getOrElse(Seq.empty)
+
+          Seq("-sourcepath", base.getAbsolutePath) ++ urlSettings
         }
       )
   }
