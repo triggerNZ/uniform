@@ -78,5 +78,13 @@ object StandardProjectPlugin extends Plugin {
           Seq("-sourcepath", base.getAbsolutePath) ++ urlSettings
         }
       )
+
+    /** Adds settings for crossbuilding against Scala 2.10. */
+    def crossBuild = Seq(
+      crossScalaVersions := Seq(scalaVersion.value, "2.10.5"),
+      scalacOptions      := scalacOptions.value.filter(o =>
+        !(scalaBinaryVersion.value == "2.10" && o == "-Ywarn-unused-import")
+      )
+    )
   }
 }
