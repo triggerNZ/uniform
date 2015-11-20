@@ -79,6 +79,14 @@ object UniformDependencyPlugin extends Plugin {
   )
 
   object hadoopCP {
+    // These versions should track the current cluster environment (but do not fear; experience
+    // suggests that everything will still work if they are a few point versions behind).
+    //
+    // Updating them is a manual process. For example, inspect the names of the files on the
+    // hadoop classpath by running this command on the integration server:
+    //     hadoop classpath | xargs -d ':' -L 1 -i bash -c "echo {}" | tr ' ' '\n'
+    // If the filename does not contain version, check inside the jar:
+    //     unzip -p /usr/lib/hadoop//parquet-avro.jar \*/MANIFEST.MF \*/pom.properties
     val modules = List[ModuleID](
       "org.apache.hadoop"            % "hadoop-core"               % depend.versions.hadoop,
       "org.apache.hadoop"            % "hadoop-tools"              % depend.versions.hadoop,
@@ -184,14 +192,12 @@ object UniformDependencyPlugin extends Plugin {
   object depend {
     object versions {
       // cloudera modules
-      def hadoop        = "2.5.0-mr1-cdh5.2.4"
-      def hadoopNoMr1   = "2.5.0-cdh5.2.4"
-      def parquet       = "1.5.0-cdh5.2.4"
-      def parquetFormat = "2.1.0-cdh5.2.4"
-      def hive          = "0.13.1-cdh5.2.4"
-      def avro          = "1.7.6-cdh5.2.4"
-      def zookeeper     = "3.4.5-cdh5.2.4"
-      def libthrift     = "0.9.0-cdh5-2"
+      def hadoop        = "2.5.0-mr1-cdh5.3.8"
+      def hadoopNoMr1   = "2.5.0-cdh5.3.8"
+      def parquet       = "1.5.0-cdh5.3.8"
+      def parquetFormat = "2.1.0-cdh5.3.8"
+      def avro          = "1.7.6-cdh5.3.8"
+      def zookeeper     = "3.4.5-cdh5.3.8"
       def jetty         = "6.1.26.cloudera.4"
 
       // other modules in the hadoop classpath
@@ -200,6 +206,10 @@ object UniformDependencyPlugin extends Plugin {
       def asm           = "3.2"
       def guava         = "11.0.2"
       def jackson       = "1.8.8"
+
+      // cloudera modules *not* on the hadoop classpath
+      def hive          = "0.13.1-cdh5.3.8"
+      def libthrift     = "0.9.0-cdh5-3"
 
       // non-hadoop modules
       def specs         = "3.5"
