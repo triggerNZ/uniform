@@ -36,6 +36,8 @@ object ScalaSettings extends Plugin {
         "-language:_",
         "-target:jvm-1.7"
       ),
+      scalacOptions in (Compile, console) ~= (_.filterNot(Set("-Ywarn-unused-import"))),
+      scalacOptions in (Test, console) := (scalacOptions in (Compile, console)).value,
       javacOptions ++= Seq(
         "-Xlint:unchecked",
         "-source", "1.7",
