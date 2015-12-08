@@ -257,11 +257,11 @@ object UniformDependencyPlugin extends Plugin {
 
     def hadoop(version: String = versions.hadoop) = Seq(
       "org.apache.hadoop"        % "hadoop-client"                  % version
-    ) map (noHadoop(_))
+    ) map noHadoop
 
     def hive(version: String = versions.hive) = Seq(
       "org.apache.hive"          % "hive-exec"                      % version
-    ) map (noHadoop(_))
+    ) map noHadoop
 
     def scalaz(version: String = versions.scalaz) = Seq(
       "org.scalaz"               %% "scalaz-core"                   % version,
@@ -313,10 +313,10 @@ object UniformDependencyPlugin extends Plugin {
     def scrooge(scrooge: String = versions.scrooge, bijection: String = versions.bijection) = Seq(
       "com.twitter"              %% "scrooge-core"                  % scrooge,
       "com.twitter"              %% "bijection-scrooge"             % bijection exclude("com.twitter", sv("scrooge-core"))
-    ) map (noHadoop(_))
+    ) map noHadoop
 
     def parquet(version: String = versions.parquet) = Seq(
       "com.twitter"              % "parquet-cascading"              % version     % "provided"
-    ) map (noHadoop(_))
+    ) map noHadoop
   }
 }

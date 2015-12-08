@@ -17,16 +17,16 @@ package version
 
 import java.text.SimpleDateFormat
 import java.util.{Date, TimeZone}
-
 import sbt._, Keys._
 
 object Times {
-  def timestamp(instant: Date, format: String = "yyyyMMddHHmmss") = {
-    val formatter = new SimpleDateFormat("yyyyMMddHHmmss")
-    formatter.setTimeZone(TimeZone.getTimeZone("UTC"))
-    formatter.format(instant)
+  lazy val formatter = {
+    val f = new SimpleDateFormat("yyyyMMddHHmmss")
+    f.setTimeZone(TimeZone.getTimeZone("UTC"))
+    f
   }
 
-  lazy val now =
-    new Date
+  def timestamp(instant: Date) = formatter.format(instant)
+
+  lazy val now = new Date
 }

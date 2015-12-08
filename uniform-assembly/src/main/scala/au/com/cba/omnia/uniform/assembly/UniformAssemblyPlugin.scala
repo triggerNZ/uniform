@@ -23,9 +23,9 @@ object UniformAssemblyPlugin extends Plugin {
     baseAssemblySettings ++ Seq[Sett](
       assemblyMergeStrategy in assembly <<= (assemblyMergeStrategy in assembly)(defaultMergeStrategy),
       test in assembly := {},
-      (artifact in (Compile, assembly) ~= { art =>
+      artifact in (Compile, assembly) ~= { art =>
         art.copy(`classifier` = Some("assembly"))
-      })
+      }
     ) ++ addArtifact(artifact in (Compile, assembly), assembly)
 
 

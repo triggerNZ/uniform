@@ -17,9 +17,6 @@ package version
 
 import sbt._, Keys._
 
-import java.util.Date
-import java.text.SimpleDateFormat
-
 object VersionInfoPlugin extends Plugin {
   import Times._
   import GitInfo._

@@ -20,7 +20,7 @@ import sbt._, Keys._
 
 object UniqueVersion extends Plugin {
   def uniqueVersionSettings = Seq(
-    version in ThisBuild        <<=  (version in ThisBuild, baseDirectory).apply((v, d)=> v + "-" + timestamp(now) + "-" + commish(d))
+    version in ThisBuild <<= (version in ThisBuild, baseDirectory) ((v, d) => v + "-" + timestamp(now) + "-" + commish(d))
   )
 
   def timestamp(instant: Date, format: String = "yyyyMMddHHmmss") = {

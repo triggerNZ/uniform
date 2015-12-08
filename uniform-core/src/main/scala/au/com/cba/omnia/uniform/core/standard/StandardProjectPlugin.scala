@@ -22,20 +22,22 @@ import sbtunidoc.Plugin._, UnidocKeys._
 import com.typesafe.sbt.SbtSite._, SiteKeys._
 
 import au.com.cba.omnia.uniform.core.setting.ScalaSettings.scala
-import au.com.cba.omnia.uniform.core.version.{GitInfo, NotAGitRepository, Dirty, Clean}
+import au.com.cba.omnia.uniform.core.version.GitInfo
 import au.com.cba.omnia.uniform.core.version.VersionInfoPlugin.{versionInfoSettings, rootPackage}
 
 object StandardProjectPlugin extends Plugin {
-  /** Manually assign link to API pages for the specified package.*/
+  /** Manually assign link to API pages for the specified package. */
   def assignApiUrl(classpath: Seq[Attributed[File]], organization: String, name: String, link: String): Option[(File, URL)] = {
-    ( for {
-      entry  <- classpath
+
+    val files = for {
+      entry <- classpath
       module <- entry.get(moduleID.key)
       if module.organization == organization
       if module.name.startsWith(name)
       jarFile = entry.data
     } yield jarFile
-    ).headOption.map(_ -> url(link))
+
+    files.headOption map (_ -> url(link))
   }
 
   object uniform {
@@ -62,18 +64,12 @@ object StandardProjectPlugin extends Plugin {
       unidocSettings ++ site.settings ++ Seq(
         site.addMappingsToSiteDir(mappings in (ScalaUnidoc, packageDoc), "latest/api"),
         includeFilter in makeSite := "*.html" | "*.css" | "*.png" | "*.jpg" | "*.gif" | "*.js" | "*.swf" | "*.md" | "*.yml",
-        apiURL <<= (baseDirectory).apply(base => Some(url(s"https://commbank.github.io/${base.getName}/latest/api"))),
+        apiURL <<= baseDirectory(base => Some(url(s"https://commbank.github.io/${base.getName}/latest/api"))),
         scalacOptions in (ScalaUnidoc, unidoc) <++= (version, baseDirectory).map { (v, base) =>
-          val hash = GitInfo.commit(base) match {
-            case NotAGitRepository => Option.empty
-            case Dirty(hash)       => Option(hash)
-            case Clean(hash)       => Option(hash)
+          val urlSettings =
+            GitInfo.commit(base).hashOption.toSeq flatMap { h =>
+            Seq("-doc-source-url", s"https://github.com/CommBank/${ base.getName }/tree/$h/€{FILE_PATH}.scala")
           }
-
-          val urlSettings = hash.map { h =>
-            val docSourceUrl = s"https://github.com/CommBank/${base.getName}/tree/$h/€{FILE_PATH}.scala"
-            Seq("-doc-source-url", docSourceUrl)
-          }.getOrElse(Seq.empty)
 
           Seq("-sourcepath", base.getAbsolutePath) ++ urlSettings
         }
