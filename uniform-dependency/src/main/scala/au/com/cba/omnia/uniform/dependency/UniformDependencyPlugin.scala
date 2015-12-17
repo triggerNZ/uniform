@@ -36,7 +36,11 @@ object UniformDependencyPlugin extends Plugin {
   )
 
   def uniformPrivateDependencySettings: Seq[Sett] = Seq[Sett](
-    resolvers += "commbank-releases-private" at "https://commbank.artifactoryonline.com/commbank/libs-releases-local")
+    resolvers ++= Seq(
+      "commbank-releases-private"     at "https://commbank.artifactoryonline.com/commbank/libs-releases-local"
+    , "commbank-releases-private-ivy" at "https://commbank.artifactoryonline.com/commbank/libs-releases-local-ivy"
+    )
+  )
 
   /**
     * Enable strict conflict management
