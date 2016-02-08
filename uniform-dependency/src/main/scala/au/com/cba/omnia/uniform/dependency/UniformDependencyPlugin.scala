@@ -220,7 +220,7 @@ object UniformDependencyPlugin extends Plugin {
       def specs         = "3.5"
       def scalaz        = "7.1.1"  // Needs to align with what is required by specs2
       def scalazStream  = "0.7a"   // Needs to align with what is required by specs2
-      def shapeless     = "2.2.5"  // Needs to align with what is required by specs2
+      def shapeless     = "2.2.5"
       def scalacheck    = "1.11.4" // Downgrade to a version that works with both specs2 and scalaz
       def nscalaTime    = "1.8.0"
       def jodaTime      = "2.7"    // Needs to align with what is required by nscala-time
