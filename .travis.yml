@@ -13,11 +13,13 @@ install:
 - ci/sbt-setup-version.sh
 script:
 - sbt -Dsbt.global.base=$TRAVIS_BUILD_DIR/ci '; test; package; scripted' && ci/sbt-deploy-ivy.sh
-  && ci/gh-pages.sh
+  && ci/sbt-gh-pages-ssh.sh
 after_script:
 - rm -rf ci
 - find $HOME/.ivy2 -name "*uniform*" -delete
 env:
   global:
-  - secure: GPsC7QFWTy+yJ0jYvqF3XOMNJ2nuiUL3QUZ/i5cbdrF9FEn2uf3dP6HjZBQs6sPdIAcE34aiu64AMp3hP6bkwltVGFJMRprXBEguBDUHWE4BQoqjoPcd9OyOwVymLnytZYbachGCCCLZ6q84sIaaEyPy6CVNSy4QNScO1eDEBB4=
-  - secure: gmVdhlmQpdAGMLlBzSns6RFsjat7ztPsHZ2L43HeS1S11vjD7DOuewvYO0xcpJh+3l1bPaJEzioMVkn9d0w/gMJec0WxBokIvlD7Fi9LA7Rjc0uxSU+3K5dOyo9+aedt+dKGa/7YZv2qdSsyNYuwk5i39dgNsaBJ6/dh4BwonY0=
+    secure: dm4u6NLrqr7bQbr1PWAlsDYnS4lK+gPWvWlga94PWZieh80/CS63KPkD6HOcIwlPBiXd9z2w/E3BBf5fFtAl0ykyYfg9vSzDY87BDZMQjrZv5BuMuedejzWGpS7nMSQDSuw/Y9lsWqbmCVTxkZyeRggUUmYbdC111dk+U2/tKu0=
+before_install:
+- openssl aes-256-cbc -K $encrypted_3dcda697bb71_key -iv $encrypted_3dcda697bb71_iv
+  -in .travis/deploy-key.enc -out .travis/deploy-key.pem -d
