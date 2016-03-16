@@ -196,7 +196,7 @@ object UniformDependencyPlugin extends Plugin {
   /**
   * Forces a dependency. i.e. adds the dependency and explicity overrides it to avoid conflict
   */
-  def forceDependency(module: ModuleId) = {
+  def forceDependency(module: ModuleID) = {
     libraryDependencies += module
     dependencyOverrides += module
   }
