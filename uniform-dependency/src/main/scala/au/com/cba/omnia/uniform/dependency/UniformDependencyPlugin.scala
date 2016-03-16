@@ -193,6 +193,14 @@ object UniformDependencyPlugin extends Plugin {
 
   def sv(module: String): String = s"${module}_${Scala.binaryVersion}"
 
+  /**
+  * Forces a dependency. i.e. adds the dependency and explicity overrides it to avoid conflict
+  */
+  def forceDependency(module: ModuleId) = {
+    libraryDependencies += module
+    dependencyOverrides += module
+  }
+
   object depend {
     object versions {
       // cloudera modules
